@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenVPN</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap" rel="stylesheet">
+  <style type="text/tailwindcss">@custom-variant dark (&:where(.dark, .dark *));</style>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .slide { display:none; } .slide.active { display:flex; }
+    @media print {
+      @page { margin: 0; }
+      .no-print { display:none !important; }
+      html, body { height:auto !important; overflow:visible !important; background:#fff !important; }
+      main { height:auto !important; } .bg-decor { display:none !important; }
+      .slide { display:flex !important; page-break-after:always; height:96vh; padding-top:78px !important; position:relative; }
+      .slide::before {
+        content: "🔐 OPENVPN";
+        position:absolute; top:0; left:0; right:0;
+        padding:18px 24px; text-align:center;
+        font-size:17px; font-weight:800; letter-spacing:0.04em; color:#4f46e5;
+        background:#ffffff; border-bottom:2px solid #e2e8f0;
+      }
+      .slide h1 { color:#4f46e5 !important; -webkit-text-fill-color:#4f46e5 !important; background:none !important; }
+    }
+    .slide .font-mono { word-break: break-word; }
+    @media screen and (max-width: 767px) {
+      .slide { justify-content: flex-start !important; padding: 1.25rem !important; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+      .slide h1 { font-size: 2.1rem !important; line-height: 1.15 !important; }
+      .slide h2 { font-size: 1.55rem !important; line-height: 1.25 !important; }
+    }
+  </style>
+  <script>(function(){ if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark'); })();</script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-white h-screen overflow-hidden transition-colors duration-300">
+
+  <div class="bg-decor fixed inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-indigo-400/20 dark:bg-indigo-600/25 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-violet-400/20 dark:bg-violet-600/20 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="no-print relative flex items-center justify-between px-6 py-3 border-b border-slate-200 dark:border-slate-800">
+    <a href="index.html" class="text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white text-sm font-semibold">← Inicio</a>
+    <span class="hidden sm:block text-indigo-600 dark:text-indigo-400 text-xs md:text-sm font-bold tracking-wider text-center">🔐 OPENVPN</span>
+    <div class="flex items-center gap-2">
+      <button onclick="downloadPDF()" class="px-3 py-1.5 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white text-sm font-semibold transition">📄 PDF</button>
+      <button onclick="toggleTheme()" class="w-9 h-9 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center"><span class="theme-icon">🌙</span></button>
+      <span id="counter" class="text-slate-500 dark:text-slate-400 text-sm font-mono w-12 text-right">1/12</span>
+    </div>
+  </div>
+
+  <main class="relative h-[calc(100vh-148px)]">
+
+    <!-- 1 portada -->
+    <section class="slide active h-full flex-col items-center justify-center text-center px-8">
+      <span class="text-indigo-600 dark:text-indigo-400 font-bold tracking-widest mb-4">RED PRIVADA VIRTUAL</span>
+      <h1 class="text-5xl md:text-7xl font-black max-w-4xl leading-tight bg-gradient-to-r from-indigo-500 to-violet-500 dark:from-indigo-300 dark:to-violet-300 bg-clip-text text-transparent pb-2">OpenVPN</h1>
+      <p class="mt-5 text-lg text-slate-500">Conéctate de forma segura a tu red desde cualquier lugar</p>
+      <p class="mt-6 text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-3xl"><span class="text-indigo-600 dark:text-indigo-300 font-semibold">OpenVPN</span> es una solución <b>VPN open source</b> que crea un <b>túnel cifrado</b> entre tu dispositivo y la red.</p>
+    </section>
+
+    <!-- 2 qué es -->
+    <section class="slide h-full flex-col items-center justify-center px-8 text-center">
+      <h2 class="text-4xl md:text-5xl font-black mb-6">¿Qué es OpenVPN?</h2>
+      <p class="text-slate-600 dark:text-slate-300 max-w-2xl mb-10">Un software que monta una <b>VPN</b>: una "red privada" que viaja cifrada por internet, como si tu equipo estuviera físicamente en la red remota.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl w-full">
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><div class="text-3xl mb-2">🔓</div><h3 class="font-bold text-indigo-600 dark:text-indigo-300">Open source</h3><p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Gratuito y auditable.</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><div class="text-3xl mb-2">🔒</div><h3 class="font-bold text-indigo-600 dark:text-indigo-300">Cifrado fuerte</h3><p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Usa SSL/TLS y certificados.</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><div class="text-3xl mb-2">🖧</div><h3 class="font-bold text-indigo-600 dark:text-indigo-300">Multiplataforma</h3><p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Windows, Linux, Mac, móvil.</p></div>
+      </div>
+    </section>
+
+    <!-- 3 cómo funciona -->
+    <section class="slide h-full flex-col items-center justify-center px-8 text-center">
+      <h2 class="text-4xl md:text-5xl font-black mb-8">¿Cómo funciona?</h2>
+      <div class="flex flex-col md:flex-row items-center justify-center gap-4 max-w-4xl w-full">
+        <div class="rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-6 flex-1"><div class="text-4xl mb-2">💻</div><h3 class="font-bold text-indigo-600 dark:text-indigo-300">Cliente</h3><p class="text-slate-500 dark:text-slate-400 text-sm">Tu equipo con el archivo <span class="font-mono">.ovpn</span></p></div>
+        <div class="text-3xl text-indigo-500">🔐➡️</div>
+        <div class="rounded-2xl bg-indigo-500/10 border border-indigo-400/40 p-6 flex-1"><div class="text-4xl mb-2">🛡️</div><h3 class="font-bold text-indigo-600 dark:text-indigo-300">Túnel cifrado</h3><p class="text-slate-500 dark:text-slate-400 text-sm">Viaja seguro por internet</p></div>
+        <div class="text-3xl text-indigo-500">➡️</div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-6 flex-1"><div class="text-4xl mb-2">🖥️</div><h3 class="font-bold text-indigo-600 dark:text-indigo-300">Servidor</h3><p class="text-slate-500 dark:text-slate-400 text-sm">Da acceso a la red interna</p></div>
+      </div>
+      <p class="mt-8 text-slate-500 dark:text-slate-400 max-w-2xl">Todo lo que pasa por el túnel va <b>cifrado</b>: nadie en medio puede leerlo.</p>
+    </section>
+
+    <!-- 4 componentes -->
+    <section class="slide h-full flex-col items-center justify-center px-8">
+      <h2 class="text-4xl md:text-5xl font-black mb-8 text-center">Componentes clave</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl w-full">
+        <div class="flex items-center gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="text-2xl">🖥️</span><div><h3 class="font-bold text-indigo-600 dark:text-indigo-300">Servidor OpenVPN</h3><p class="text-slate-500 dark:text-slate-400 text-sm">Suele estar en el VPS o router.</p></div></div>
+        <div class="flex items-center gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="text-2xl">📜</span><div><h3 class="font-bold text-indigo-600 dark:text-indigo-300">Certificados (CA)</h3><p class="text-slate-500 dark:text-slate-400 text-sm">Identifican a servidor y clientes.</p></div></div>
+        <div class="flex items-center gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="text-2xl">📄</span><div><h3 class="font-bold text-indigo-600 dark:text-indigo-300">Archivo .ovpn</h3><p class="text-slate-500 dark:text-slate-400 text-sm">Config que importa cada cliente.</p></div></div>
+        <div class="flex items-center gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="text-2xl">📱</span><div><h3 class="font-bold text-indigo-600 dark:text-indigo-300">App cliente</h3><p class="text-slate-500 dark:text-slate-400 text-sm">OpenVPN Connect / GUI.</p></div></div>
+      </div>
+    </section>
+
+    <!-- 5 casos de uso -->
+    <section class="slide h-full flex-col items-center justify-center px-8">
+      <h2 class="text-4xl md:text-5xl font-black mb-8 text-center">Casos de uso</h2>
+      <div class="space-y-4 max-w-3xl w-full">
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><p class="font-semibold text-indigo-600 dark:text-indigo-300">🏢 Teletrabajo</p><p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Acceder a recursos internos de la empresa desde casa.</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><p class="font-semibold text-indigo-600 dark:text-indigo-300">🛠️ Administración remota</p><p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Entrar de forma segura a routers, OLTs o servidores.</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><p class="font-semibold text-indigo-600 dark:text-indigo-300">🔗 Unir redes</p><p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Conectar dos sedes como si fueran una sola red.</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><p class="font-semibold text-indigo-600 dark:text-indigo-300">🔐 Privacidad</p><p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Cifrar la conexión en redes Wi-Fi públicas.</p></div>
+      </div>
+    </section>
+
+    <!-- 6 instalar servidor -->
+    <section class="slide h-full flex-col items-center justify-center px-8">
+      <span class="text-indigo-600 dark:text-indigo-400 font-bold tracking-widest mb-3 text-center block">INSTALACIÓN DEL SERVIDOR</span>
+      <h2 class="text-4xl md:text-5xl font-black mb-6 text-center">Forma rápida (script)</h2>
+      <p class="text-slate-600 dark:text-slate-300 mb-5 text-center max-w-2xl">En el VPS (Hetzner), un script muy usado instala todo de forma guiada:</p>
+      <div class="w-full max-w-3xl space-y-3">
+        <div class="rounded-xl bg-slate-900 dark:bg-black/60 border border-slate-700 p-5 font-mono text-xs sm:text-sm text-indigo-300 overflow-x-auto"><span class="text-slate-500"># Descargar y ejecutar el instalador</span><br>wget https://git.io/vpn -O openvpn-install.sh<br>bash openvpn-install.sh</div>
+      </div>
+      <p class="mt-5 text-slate-500 dark:text-slate-400 text-sm text-center max-w-2xl">El asistente te pregunta IP, puerto, protocolo (UDP) y DNS, y al final crea el <b>primer cliente</b>.</p>
+    </section>
+
+    <!-- 7 crear clientes -->
+    <section class="slide h-full flex-col items-center justify-center px-8">
+      <h2 class="text-4xl md:text-5xl font-black mb-8 text-center">Crear clientes (.ovpn)</h2>
+      <div class="space-y-4 max-w-3xl w-full">
+        <div class="flex items-start gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="flex-shrink-0 w-9 h-9 rounded-full bg-indigo-500 text-white font-black flex items-center justify-center">1</span><p class="text-slate-600 dark:text-slate-300">Vuelve a ejecutar <span class="font-mono">bash openvpn-install.sh</span> y elige <b>"Add a new client"</b>.</p></div>
+        <div class="flex items-start gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="flex-shrink-0 w-9 h-9 rounded-full bg-indigo-500 text-white font-black flex items-center justify-center">2</span><p class="text-slate-600 dark:text-slate-300">Ponle un <b>nombre</b> (ej. <span class="font-mono">juan-laptop</span>).</p></div>
+        <div class="flex items-start gap-4 rounded-xl bg-indigo-500/10 border border-indigo-400/40 p-5"><span class="flex-shrink-0 w-9 h-9 rounded-full bg-indigo-500 text-white font-black flex items-center justify-center">3</span><p class="text-slate-700 dark:text-slate-200">Se genera un archivo <b><span class="font-mono">.ovpn</span></b> con todo dentro: cópialo al dispositivo del usuario.</p></div>
+      </div>
+    </section>
+
+    <!-- 8 conectarse -->
+    <section class="slide h-full flex-col items-center justify-center px-8">
+      <h2 class="text-4xl md:text-5xl font-black mb-8 text-center">Conectarse desde el cliente</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl w-full text-center">
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-6"><div class="text-3xl mb-2">🪟</div><h3 class="font-bold text-indigo-600 dark:text-indigo-300">Windows / Mac</h3><p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Instala <b>OpenVPN Connect</b> e importa el .ovpn.</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-6"><div class="text-3xl mb-2">📱</div><h3 class="font-bold text-indigo-600 dark:text-indigo-300">Android / iOS</h3><p class="text-slate-500 dark:text-slate-400 text-sm mt-1">App <b>OpenVPN</b>, importa el archivo y conecta.</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-6"><div class="text-3xl mb-2">🐧</div><h3 class="font-bold text-indigo-600 dark:text-indigo-300">Linux</h3><p class="text-slate-500 dark:text-slate-400 text-sm mt-1"><span class="font-mono text-xs">openvpn --config cliente.ovpn</span></p></div>
+      </div>
+      <p class="mt-8 text-slate-500 dark:text-slate-400 text-center">Pulsas <b>Conectar</b> y ya estás dentro de la red de forma segura. 🟢</p>
+    </section>
+
+    <!-- 9 seguridad -->
+    <section class="slide h-full flex-col items-center justify-center px-8">
+      <h2 class="text-4xl md:text-5xl font-black mb-8 text-center">Seguridad y buenas prácticas</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl w-full">
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-6"><h3 class="font-bold text-indigo-600 dark:text-indigo-300 mb-1">👤 Un certificado por persona</h3><p class="text-slate-500 dark:text-slate-400 text-sm">Nunca compartas el mismo .ovpn entre varios.</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-6"><h3 class="font-bold text-indigo-600 dark:text-indigo-300 mb-1">🚫 Revoca accesos</h3><p class="text-slate-500 dark:text-slate-400 text-sm">Si alguien se va, revoca su certificado.</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-6"><h3 class="font-bold text-indigo-600 dark:text-indigo-300 mb-1">🔥 Firewall</h3><p class="text-slate-500 dark:text-slate-400 text-sm">Abre solo el puerto de la VPN (ej. 1194/UDP).</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-6"><h3 class="font-bold text-indigo-600 dark:text-indigo-300 mb-1">⬆️ Mantén actualizado</h3><p class="text-slate-500 dark:text-slate-400 text-sm">Actualiza el servidor y el cliente OpenVPN.</p></div>
+      </div>
+    </section>
+
+    <!-- 10 ronda preguntas -->
+    <section class="slide h-full flex-col items-center justify-center px-8">
+      <div class="text-5xl mb-4">🙋</div>
+      <h2 class="text-4xl md:text-5xl font-black mb-8 text-center text-indigo-600 dark:text-indigo-300">Ronda de preguntas</h2>
+      <div class="space-y-4 max-w-3xl w-full">
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><p class="font-semibold">1. ¿Qué crea OpenVPN entre cliente y servidor?</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><p class="font-semibold">2. ¿Qué archivo importa cada cliente para conectarse?</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><p class="font-semibold">3. Menciona 2 casos de uso de una VPN.</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><p class="font-semibold">4. ¿Por qué no compartir el mismo certificado?</p></div>
+      </div>
+    </section>
+
+    <!-- 11 resumen -->
+    <section class="slide h-full flex-col items-center justify-center px-8 text-center">
+      <div class="text-5xl mb-4">✅</div>
+      <h2 class="text-4xl md:text-5xl font-black mb-8">Resumen del tema</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl w-full text-left">
+        <div class="rounded-xl bg-indigo-500/10 border border-indigo-400/30 p-5">OpenVPN crea un <b>túnel cifrado</b> hacia tu red.</div>
+        <div class="rounded-xl bg-indigo-500/10 border border-indigo-400/30 p-5">Se instala en un <b>servidor</b> y usa <b>certificados</b>.</div>
+        <div class="rounded-xl bg-indigo-500/10 border border-indigo-400/30 p-5">Cada cliente importa su archivo <b>.ovpn</b>.</div>
+        <div class="rounded-xl bg-indigo-500/10 border border-indigo-400/30 p-5">Ideal para <b>teletrabajo</b> y administración remota.</div>
+      </div>
+      <p class="mt-8 text-slate-500">Última diapositiva: la herramienta web 🛠️</p>
+    </section>
+
+    <!-- 12 herramienta link -->
+    <section class="slide h-full flex-col items-center justify-center px-8 text-center">
+      <div class="text-6xl mb-6">🛠️</div>
+      <span class="text-indigo-600 dark:text-indigo-400 font-bold tracking-widest mb-4">HERRAMIENTA OPENVPN</span>
+      <h2 class="text-3xl md:text-5xl font-black mb-4 max-w-3xl">Gestiona tu OpenVPN desde la web</h2>
+      <p class="text-slate-600 dark:text-slate-300 max-w-2xl mb-8">Accede a la herramienta de <b>Red Nueva Conexión</b> para crear y administrar tus accesos OpenVPN de forma sencilla:</p>
+      <a href="https://ovpn.rednuevaconexion.net/" target="_blank" rel="noopener" class="group inline-flex items-center gap-3 px-8 py-5 rounded-2xl bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-400 hover:to-violet-400 text-white text-lg md:text-2xl font-bold shadow-xl shadow-indigo-500/20 transition">
+        <span>🔐 ovpn.rednuevaconexion.net</span>
+        <span class="group-hover:translate-x-1 transition-transform">↗</span>
+      </a>
+      <p class="mt-6 text-slate-500 dark:text-slate-400 text-sm break-all font-mono">https://ovpn.rednuevaconexion.net/</p>
+    </section>
+
+  </main>
+
+  <div class="no-print relative flex items-center justify-between px-6 pt-3 pb-12 border-t border-slate-200 dark:border-slate-800">
+    <button onclick="prev()" class="px-5 py-2 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 font-semibold transition">← Anterior</button>
+    <div id="dots" class="hidden md:flex gap-2"></div>
+    <button onclick="next()" class="px-5 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white font-bold transition">Siguiente →</button>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let cur = 0;
+    const dots = document.getElementById('dots');
+    slides.forEach((_, i) => { const d=document.createElement('button'); d.onclick=()=>go(i); dots.appendChild(d); });
+    function render(){
+      slides.forEach((s,i)=>s.classList.toggle('active', i===cur));
+      document.getElementById('counter').textContent = `${cur+1}/${slides.length}`;
+      [...dots.children].forEach((d,i)=>d.className=`h-2.5 rounded-full transition ${i===cur?'bg-indigo-500 w-6':'bg-slate-300 dark:bg-slate-600 w-2.5'}`);
+    }
+    function go(i){ cur=Math.max(0,Math.min(slides.length-1,i)); render(); }
+    function next(){ go(cur+1); } function prev(){ go(cur-1); }
+    function downloadPDF(){ window.print(); }
+    function toggleTheme(){ const el=document.documentElement; el.classList.toggle('dark'); localStorage.setItem('theme', el.classList.contains('dark')?'dark':'light'); updateThemeUI(); }
+    function updateThemeUI(){ const dark=document.documentElement.classList.contains('dark'); document.querySelectorAll('.theme-icon').forEach(e=>e.textContent=dark?'☀️':'🌙'); }
+    document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight')next(); if(e.key==='ArrowLeft')prev(); });
+    updateThemeUI(); render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursos · Hetzner, Uptime Kuma y OpenVPN</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap" rel="stylesheet">
+  <style type="text/tailwindcss">
+    @custom-variant dark (&:where(.dark, .dark *));
+  </style>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+  <script>
+    (function(){ if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark'); })();
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-white min-h-screen transition-colors duration-300">
+
+  <!-- Fondo decorativo -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-red-400/20 dark:bg-red-600/25 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/3 -right-40 w-96 h-96 bg-emerald-400/20 dark:bg-emerald-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-indigo-400/20 dark:bg-indigo-600/20 rounded-full blur-3xl"></div>
+  </div>
+
+  <!-- Botón de tema -->
+  <button onclick="toggleTheme()" class="fixed top-4 right-4 z-50 flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-lg hover:scale-105 transition">
+    <span class="theme-icon text-lg">🌙</span>
+    <span class="theme-label hidden sm:inline text-sm font-semibold">Modo oscuro</span>
+  </button>
+
+  <main class="relative max-w-6xl mx-auto px-6 py-16">
+
+    <!-- Encabezado -->
+    <header class="text-center mb-16">
+      <span class="inline-block px-4 py-1.5 rounded-full bg-red-500/10 border border-red-400/30 text-red-600 dark:text-red-300 text-sm font-semibold tracking-wide mb-6">
+        INFRAESTRUCTURA EN LA NUBE · 2026
+      </span>
+      <h1 class="text-5xl md:text-7xl font-black tracking-tight bg-gradient-to-r from-red-500 via-emerald-500 to-indigo-500 dark:from-red-300 dark:via-emerald-300 dark:to-indigo-300 bg-clip-text text-transparent leading-tight pb-2">
+        Hetzner · Uptime Kuma · OpenVPN
+      </h1>
+      <p class="mt-6 text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+        Aprende a <span class="font-semibold text-slate-800 dark:text-slate-200">desplegar tu propia infraestructura</span>: crea un servidor en la nube, monitorea tus servicios y conéctate de forma segura con VPN. Cada tema explicado <span class="font-semibold text-slate-800 dark:text-slate-200">paso a paso</span>.
+      </p>
+    </header>
+
+    <!-- Temas -->
+    <section class="space-y-5">
+
+      <!-- Tema 1 -->
+      <a href="hetzner.html" class="group flex flex-col md:flex-row md:items-center gap-5 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-6 md:p-7 hover:border-red-400 dark:hover:border-red-400/60 hover:shadow-xl hover:shadow-red-500/5 transition-all duration-300">
+        <div class="flex items-center gap-5 md:w-56 flex-shrink-0">
+          <div class="flex flex-col items-center justify-center w-20 h-20 rounded-2xl bg-red-500/10 text-red-600 dark:text-red-300 flex-shrink-0">
+            <span class="text-[10px] font-bold tracking-widest">TEMA</span>
+            <span class="text-3xl font-black leading-none">1</span>
+          </div>
+          <div class="text-4xl">☁️</div>
+        </div>
+        <div class="flex-1">
+          <h2 class="text-2xl font-bold mb-1">Creación de cuenta en Hetzner</h2>
+          <p class="text-slate-600 dark:text-slate-400 text-sm">Registro paso a paso, verificación, métodos de pago y <b>precios aproximados</b> de las máquinas con sus características.</p>
+          <span class="inline-block mt-2 text-xs font-semibold px-2.5 py-1 rounded-full bg-red-500/10 text-red-600 dark:text-red-300">12 diapositivas</span>
+        </div>
+        <span class="hidden md:flex items-center gap-1 text-red-600 dark:text-red-300 font-semibold">Entrar <span class="group-hover:translate-x-1 transition-transform">→</span></span>
+      </a>
+
+      <!-- Tema 2 -->
+      <a href="uptime-kuma.html" class="group flex flex-col md:flex-row md:items-center gap-5 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-6 md:p-7 hover:border-emerald-400 dark:hover:border-emerald-400/60 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300">
+        <div class="flex items-center gap-5 md:w-56 flex-shrink-0">
+          <div class="flex flex-col items-center justify-center w-20 h-20 rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-300 flex-shrink-0">
+            <span class="text-[10px] font-bold tracking-widest">TEMA</span>
+            <span class="text-3xl font-black leading-none">2</span>
+          </div>
+          <div class="text-4xl">📊</div>
+        </div>
+        <div class="flex-1">
+          <h2 class="text-2xl font-bold mb-1">Instalar Uptime Kuma</h2>
+          <p class="text-slate-600 dark:text-slate-400 text-sm">Monitoreo de servicios con la herramienta open source más popular: instalación con Docker y manual, monitores y alertas.</p>
+          <span class="inline-block mt-2 text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-300">12 diapositivas</span>
+        </div>
+        <span class="hidden md:flex items-center gap-1 text-emerald-600 dark:text-emerald-300 font-semibold">Entrar <span class="group-hover:translate-x-1 transition-transform">→</span></span>
+      </a>
+
+      <!-- Tema 3 -->
+      <a href="openvpn.html" class="group flex flex-col md:flex-row md:items-center gap-5 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-6 md:p-7 hover:border-indigo-400 dark:hover:border-indigo-400/60 hover:shadow-xl hover:shadow-indigo-500/5 transition-all duration-300">
+        <div class="flex items-center gap-5 md:w-56 flex-shrink-0">
+          <div class="flex flex-col items-center justify-center w-20 h-20 rounded-2xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-300 flex-shrink-0">
+            <span class="text-[10px] font-bold tracking-widest">TEMA</span>
+            <span class="text-3xl font-black leading-none">3</span>
+          </div>
+          <div class="text-4xl">🔐</div>
+        </div>
+        <div class="flex-1">
+          <h2 class="text-2xl font-bold mb-1">OpenVPN</h2>
+          <p class="text-slate-600 dark:text-slate-400 text-sm">Qué es, cómo funciona el túnel cifrado, instalación del servidor, creación de clientes y la <b>herramienta web</b> para gestionarlo.</p>
+          <span class="inline-block mt-2 text-xs font-semibold px-2.5 py-1 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-300">12 diapositivas</span>
+        </div>
+        <span class="hidden md:flex items-center gap-1 text-indigo-600 dark:text-indigo-300 font-semibold">Entrar <span class="group-hover:translate-x-1 transition-transform">→</span></span>
+      </a>
+
+    </section>
+
+    <!-- Acceso rápido a la herramienta -->
+    <a href="https://ovpn.rednuevaconexion.net/" target="_blank" rel="noopener" class="group mt-6 flex flex-col md:flex-row md:items-center gap-4 rounded-2xl bg-gradient-to-br from-indigo-500/15 to-cyan-500/15 border border-indigo-400/30 p-6 hover:border-indigo-400 transition-all duration-300">
+      <div class="text-4xl">🛠️</div>
+      <div class="flex-1">
+        <h3 class="font-bold text-lg">Herramienta OpenVPN · Red Nueva Conexión</h3>
+        <p class="text-slate-600 dark:text-slate-300 text-sm break-all">https://ovpn.rednuevaconexion.net/</p>
+      </div>
+      <span class="inline-flex items-center gap-1 px-4 py-2 rounded-lg bg-indigo-500 text-white font-semibold whitespace-nowrap">Abrir herramienta <span class="group-hover:translate-x-1 transition-transform">↗</span></span>
+    </a>
+
+    <!-- Ayuda -->
+    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div class="rounded-2xl bg-gradient-to-br from-red-500/10 to-emerald-500/10 border border-red-400/20 p-6">
+        <h3 class="font-bold mb-2">💡 Cómo navegar</h3>
+        <p class="text-slate-600 dark:text-slate-300 text-sm">Dentro de cada tema usa las <b>flechas ← →</b> del teclado, los botones o los puntos inferiores para cambiar de diapositiva.</p>
+      </div>
+      <div class="rounded-2xl bg-gradient-to-br from-emerald-500/10 to-indigo-500/10 border border-emerald-400/20 p-6">
+        <h3 class="font-bold mb-2">📄 Descargar en PDF</h3>
+        <p class="text-slate-600 dark:text-slate-300 text-sm">Cada tema tiene un botón <b>"PDF"</b> que exporta TODAS sus diapositivas listas para imprimir o compartir.</p>
+      </div>
+    </div>
+
+    <footer class="text-center mt-16 text-slate-500 text-sm">
+      <p>Material de capacitación · 3 temas · 36 diapositivas</p>
+    </footer>
+
+  </main>
+
+  <script>
+    function toggleTheme(){
+      const el = document.documentElement;
+      el.classList.toggle('dark');
+      localStorage.setItem('theme', el.classList.contains('dark') ? 'dark' : 'light');
+      updateThemeUI();
+    }
+    function updateThemeUI(){
+      const dark = document.documentElement.classList.contains('dark');
+      document.querySelectorAll('.theme-icon').forEach(e => e.textContent = dark ? '☀️' : '🌙');
+      document.querySelectorAll('.theme-label').forEach(e => e.textContent = dark ? 'Modo claro' : 'Modo oscuro');
+    }
+    updateThemeUI();
+  </script>
+</body>
+</html>

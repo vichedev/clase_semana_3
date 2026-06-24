@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creación de cuenta en Hetzner</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap" rel="stylesheet">
+  <style type="text/tailwindcss">@custom-variant dark (&:where(.dark, .dark *));</style>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .slide { display:none; } .slide.active { display:flex; }
+    @media print {
+      @page { margin: 0; }
+      .no-print { display:none !important; }
+      html, body { height:auto !important; overflow:visible !important; background:#fff !important; }
+      main { height:auto !important; } .bg-decor { display:none !important; }
+      .slide { display:flex !important; page-break-after:always; height:96vh; padding-top:78px !important; position:relative; }
+      .slide::before {
+        content: "☁️ CREACIÓN DE CUENTA EN HETZNER";
+        position:absolute; top:0; left:0; right:0;
+        padding:18px 24px; text-align:center;
+        font-size:17px; font-weight:800; letter-spacing:0.04em; color:#dc2626;
+        background:#ffffff; border-bottom:2px solid #e2e8f0;
+      }
+      .slide h1 { color:#dc2626 !important; -webkit-text-fill-color:#dc2626 !important; background:none !important; }
+    }
+    .slide .font-mono { word-break: break-word; }
+    @media screen and (max-width: 767px) {
+      .slide { justify-content: flex-start !important; padding: 1.25rem !important; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+      .slide h1 { font-size: 2.1rem !important; line-height: 1.15 !important; }
+      .slide h2 { font-size: 1.55rem !important; line-height: 1.25 !important; }
+    }
+  </style>
+  <script>(function(){ if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark'); })();</script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-white h-screen overflow-hidden transition-colors duration-300">
+
+  <div class="bg-decor fixed inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-red-400/20 dark:bg-red-600/25 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-orange-400/20 dark:bg-orange-600/20 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="no-print relative flex items-center justify-between px-6 py-3 border-b border-slate-200 dark:border-slate-800">
+    <a href="index.html" class="text-slate-500 dark:text-slate-400 hover:text-red-600 dark:hover:text-white text-sm font-semibold">← Inicio</a>
+    <span class="hidden sm:block text-red-600 dark:text-red-400 text-xs md:text-sm font-bold tracking-wider text-center">☁️ CREACIÓN DE CUENTA EN HETZNER</span>
+    <div class="flex items-center gap-2">
+      <button onclick="downloadPDF()" class="px-3 py-1.5 rounded-lg bg-red-500 hover:bg-red-400 text-white text-sm font-semibold transition">📄 PDF</button>
+      <button onclick="toggleTheme()" class="w-9 h-9 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center"><span class="theme-icon">🌙</span></button>
+      <span id="counter" class="text-slate-500 dark:text-slate-400 text-sm font-mono w-12 text-right">1/12</span>
+    </div>
+  </div>
+
+  <main class="relative h-[calc(100vh-148px)]">
+
+    <!-- 1 portada -->
+    <section class="slide active h-full flex-col items-center justify-center text-center px-8">
+      <span class="text-red-600 dark:text-red-400 font-bold tracking-widest mb-4">PROVEEDOR DE NUBE</span>
+      <h1 class="text-5xl md:text-7xl font-black max-w-4xl leading-tight bg-gradient-to-r from-red-500 to-orange-500 dark:from-red-300 dark:to-orange-300 bg-clip-text text-transparent pb-2">Creación de cuenta en Hetzner</h1>
+      <p class="mt-5 text-lg text-slate-500">Cómo registrarte paso a paso y crear tu primer servidor en la nube</p>
+      <p class="mt-6 text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-3xl"><span class="text-red-600 dark:text-red-300 font-semibold">Hetzner</span> es un proveedor alemán de servidores y nube con una de las <b>mejores relaciones precio / rendimiento</b> del mercado.</p>
+    </section>
+
+    <!-- 2 qué es -->
+    <section class="slide h-full flex-col items-center justify-center px-8 text-center">
+      <h2 class="text-4xl md:text-5xl font-black mb-6">¿Qué es Hetzner?</h2>
+      <p class="text-slate-600 dark:text-slate-300 max-w-2xl mb-10">Empresa alemana (fundada en 1997) con centros de datos en <b>Alemania, Finlandia, EE. UU. y Singapur</b>. Ofrece varios productos:</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl w-full">
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><h3 class="font-bold text-red-600 dark:text-red-300">☁️ Hetzner Cloud</h3><p class="text-slate-500 dark:text-slate-400 text-sm mt-1">VPS por horas/mes. Lo que usaremos aquí.</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><h3 class="font-bold text-red-600 dark:text-red-300">🖥️ Dedicated</h3><p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Servidores físicos dedicados.</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><h3 class="font-bold text-red-600 dark:text-red-300">💾 Storage Box</h3><p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Almacenamiento y backups.</p></div>
+      </div>
+    </section>
+
+    <!-- 3 por qué -->
+    <section class="slide h-full flex-col items-center justify-center px-8">
+      <h2 class="text-4xl md:text-5xl font-black mb-10 text-center">¿Por qué usar Hetzner?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl w-full">
+        <div class="flex items-center gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="text-2xl">💲</span><div><h3 class="font-bold text-red-600 dark:text-red-300">Económico</h3><p class="text-slate-500 dark:text-slate-400 text-sm">Desde menos de 4 € al mes por un VPS.</p></div></div>
+        <div class="flex items-center gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="text-2xl">⚡</span><div><h3 class="font-bold text-red-600 dark:text-red-300">Buen rendimiento</h3><p class="text-slate-500 dark:text-slate-400 text-sm">CPU rápidas, discos NVMe y red de 1–10 Gbit.</p></div></div>
+        <div class="flex items-center gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="text-2xl">⏱️</span><div><h3 class="font-bold text-red-600 dark:text-red-300">Pago por hora</h3><p class="text-slate-500 dark:text-slate-400 text-sm">Pagas solo lo que usas, con tope mensual.</p></div></div>
+        <div class="flex items-center gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="text-2xl">🎛️</span><div><h3 class="font-bold text-red-600 dark:text-red-300">Panel sencillo</h3><p class="text-slate-500 dark:text-slate-400 text-sm">Cloud Console clara + API para automatizar.</p></div></div>
+      </div>
+    </section>
+
+    <!-- 4 paso 1 registro -->
+    <section class="slide h-full flex-col items-center justify-center px-8">
+      <span class="text-red-600 dark:text-red-400 font-bold tracking-widest mb-3 text-center block">PASO 1</span>
+      <h2 class="text-4xl md:text-5xl font-black mb-8 text-center">Ir a la web y registrarse</h2>
+      <div class="space-y-4 max-w-3xl w-full">
+        <div class="flex items-start gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="flex-shrink-0 w-9 h-9 rounded-full bg-red-500 text-white font-black flex items-center justify-center">1</span><p class="text-slate-600 dark:text-slate-300">Entra a <span class="font-mono text-red-600 dark:text-red-300">hetzner.com</span> y pulsa <b>"Cloud"</b> → <b>"Sign Up"</b> / Registrarse.</p></div>
+        <div class="flex items-start gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="flex-shrink-0 w-9 h-9 rounded-full bg-red-500 text-white font-black flex items-center justify-center">2</span><p class="text-slate-600 dark:text-slate-300">Escribe tu <b>correo electrónico</b> y una <b>contraseña</b> segura.</p></div>
+        <div class="flex items-start gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="flex-shrink-0 w-9 h-9 rounded-full bg-red-500 text-white font-black flex items-center justify-center">3</span><p class="text-slate-600 dark:text-slate-300">Acepta los términos y pulsa registrar. Revisa tu correo y <b>confirma la cuenta</b> con el enlace.</p></div>
+      </div>
+    </section>
+
+    <!-- 5 paso 2 datos / verificación -->
+    <section class="slide h-full flex-col items-center justify-center px-8">
+      <span class="text-red-600 dark:text-red-400 font-bold tracking-widest mb-3 text-center block">PASO 2</span>
+      <h2 class="text-4xl md:text-5xl font-black mb-8 text-center">Datos y verificación de identidad</h2>
+      <div class="space-y-4 max-w-3xl w-full">
+        <div class="flex items-start gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="flex-shrink-0 w-9 h-9 rounded-full bg-red-500 text-white font-black flex items-center justify-center">1</span><p class="text-slate-600 dark:text-slate-300">Completa <b>nombre, dirección y país</b>. Deben ser datos reales (se facturan).</p></div>
+        <div class="flex items-start gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="flex-shrink-0 w-9 h-9 rounded-full bg-red-500 text-white font-black flex items-center justify-center">2</span><p class="text-slate-600 dark:text-slate-300">En cuentas nuevas Hetzner puede pedir <b>verificación de identidad</b> (foto de un documento o selfie) para evitar fraude.</p></div>
+        <div class="flex items-start gap-4 rounded-xl bg-red-500/10 border border-red-400/40 p-5"><span class="flex-shrink-0 w-9 h-9 rounded-full bg-red-500 text-white font-black flex items-center justify-center">✓</span><p class="text-slate-700 dark:text-slate-200">La verificación suele tardar de <b>minutos a unas horas</b>. Hasta aprobarla no podrás crear servidores.</p></div>
+      </div>
+    </section>
+
+    <!-- 6 paso 3 pago -->
+    <section class="slide h-full flex-col items-center justify-center px-8">
+      <span class="text-red-600 dark:text-red-400 font-bold tracking-widest mb-3 text-center block">PASO 3</span>
+      <h2 class="text-4xl md:text-5xl font-black mb-8 text-center">Método de pago</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl w-full">
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5 text-center"><div class="text-3xl mb-2">💳</div><h3 class="font-bold text-red-600 dark:text-red-300">Tarjeta</h3><p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Crédito o débito (Visa / Mastercard).</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5 text-center"><div class="text-3xl mb-2">🅿️</div><h3 class="font-bold text-red-600 dark:text-red-300">PayPal</h3><p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Vincula tu cuenta de PayPal.</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5 text-center"><div class="text-3xl mb-2">🏦</div><h3 class="font-bold text-red-600 dark:text-red-300">Transferencia</h3><p class="text-slate-500 dark:text-slate-400 text-sm mt-1">SEPA / banco (según país).</p></div>
+      </div>
+      <p class="mt-8 text-slate-500 dark:text-slate-400 text-center max-w-2xl">Se factura <b>a fin de mes</b> según el consumo. Puede cobrarse un pequeño importe inicial de validación de la tarjeta.</p>
+    </section>
+
+    <!-- 7 paso 4 crear servidor -->
+    <section class="slide h-full flex-col items-center justify-center px-8">
+      <span class="text-red-600 dark:text-red-400 font-bold tracking-widest mb-3 text-center block">PASO 4</span>
+      <h2 class="text-4xl md:text-5xl font-black mb-8 text-center">Crear tu primer servidor</h2>
+      <div class="space-y-4 max-w-3xl w-full">
+        <div class="flex items-start gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="flex-shrink-0 w-9 h-9 rounded-full bg-red-500 text-white font-black flex items-center justify-center">1</span><p class="text-slate-600 dark:text-slate-300">Entra a <b>Cloud Console</b> y crea un <b>Proyecto</b> (ej. "Pruebas").</p></div>
+        <div class="flex items-start gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="flex-shrink-0 w-9 h-9 rounded-full bg-red-500 text-white font-black flex items-center justify-center">2</span><p class="text-slate-600 dark:text-slate-300">Pulsa <b>"Add Server"</b>. Elige <b>ubicación</b> (Alemania, Finlandia, EE. UU.…).</p></div>
+        <div class="flex items-start gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="flex-shrink-0 w-9 h-9 rounded-full bg-red-500 text-white font-black flex items-center justify-center">3</span><p class="text-slate-600 dark:text-slate-300">Elige <b>imagen</b> (Ubuntu, Debian…), el <b>tipo de máquina</b> y añade tu <b>clave SSH</b>.</p></div>
+        <div class="flex items-start gap-4 rounded-xl bg-red-500/10 border border-red-400/40 p-5"><span class="flex-shrink-0 w-9 h-9 rounded-full bg-red-500 text-white font-black flex items-center justify-center">4</span><p class="text-slate-700 dark:text-slate-200">Pulsa <b>"Create & Buy now"</b>. En segundos tendrás tu <b>IP pública</b> para conectarte por SSH.</p></div>
+      </div>
+    </section>
+
+    <!-- 8 precios tabla -->
+    <section class="slide h-full flex-col items-center justify-center px-6">
+      <h2 class="text-3xl md:text-5xl font-black mb-2 text-center">Precios y características</h2>
+      <p class="text-slate-500 dark:text-slate-400 text-sm mb-6 text-center">Hetzner Cloud · valores <b>aproximados</b> en € / mes (pueden variar)</p>
+      <div class="w-full max-w-4xl overflow-x-auto">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="text-left text-red-600 dark:text-red-300 border-b-2 border-red-400/40">
+              <th class="py-2 px-3">Modelo</th><th class="py-2 px-3">vCPU</th><th class="py-2 px-3">RAM</th><th class="py-2 px-3">Disco</th><th class="py-2 px-3">≈ €/mes</th>
+            </tr>
+          </thead>
+          <tbody class="text-slate-600 dark:text-slate-300">
+            <tr class="border-b border-slate-200 dark:border-slate-800"><td class="py-2 px-3 font-mono font-bold">CX22</td><td class="py-2 px-3">2 (Intel)</td><td class="py-2 px-3">4 GB</td><td class="py-2 px-3">40 GB</td><td class="py-2 px-3 font-bold">≈ 3,8 €</td></tr>
+            <tr class="border-b border-slate-200 dark:border-slate-800"><td class="py-2 px-3 font-mono font-bold">CX32</td><td class="py-2 px-3">4 (Intel)</td><td class="py-2 px-3">8 GB</td><td class="py-2 px-3">80 GB</td><td class="py-2 px-3 font-bold">≈ 6,8 €</td></tr>
+            <tr class="border-b border-slate-200 dark:border-slate-800"><td class="py-2 px-3 font-mono font-bold">CAX11</td><td class="py-2 px-3">2 (ARM)</td><td class="py-2 px-3">4 GB</td><td class="py-2 px-3">40 GB</td><td class="py-2 px-3 font-bold">≈ 3,8 €</td></tr>
+            <tr class="border-b border-slate-200 dark:border-slate-800"><td class="py-2 px-3 font-mono font-bold">CAX21</td><td class="py-2 px-3">4 (ARM)</td><td class="py-2 px-3">8 GB</td><td class="py-2 px-3">80 GB</td><td class="py-2 px-3 font-bold">≈ 6,5 €</td></tr>
+            <tr class="border-b border-slate-200 dark:border-slate-800"><td class="py-2 px-3 font-mono font-bold">CPX31</td><td class="py-2 px-3">4 (AMD)</td><td class="py-2 px-3">8 GB</td><td class="py-2 px-3">160 GB</td><td class="py-2 px-3 font-bold">≈ 13,6 €</td></tr>
+            <tr><td class="py-2 px-3 font-mono font-bold">CPX41</td><td class="py-2 px-3">8 (AMD)</td><td class="py-2 px-3">16 GB</td><td class="py-2 px-3">240 GB</td><td class="py-2 px-3 font-bold">≈ 25 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-5 text-slate-500 dark:text-slate-400 text-xs text-center max-w-2xl">Se suma una pequeña tarifa por IPv4 (~0,5 €/mes). Las líneas <b>CX</b> (Intel), <b>CPX</b> (AMD) y <b>CAX</b> (ARM) comparten CPU; las <b>CCX</b> son dedicadas y más caras.</p>
+    </section>
+
+    <!-- 9 qué máquina elegir -->
+    <section class="slide h-full flex-col items-center justify-center px-8">
+      <h2 class="text-4xl md:text-5xl font-black mb-8 text-center">¿Qué máquina elijo?</h2>
+      <div class="space-y-4 max-w-3xl w-full">
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><p class="font-semibold text-red-600 dark:text-red-300">🧪 Pruebas / 1 servicio pequeño</p><p class="text-slate-500 dark:text-slate-400 text-sm mt-1"><b>CX22 o CAX11</b> (2 vCPU, 4 GB) — perfecto para Uptime Kuma o una web.</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><p class="font-semibold text-red-600 dark:text-red-300">🐳 Varios contenedores Docker</p><p class="text-slate-500 dark:text-slate-400 text-sm mt-1"><b>CX32 / CAX21</b> (4 vCPU, 8 GB) — para correr varios servicios a la vez.</p></div>
+        <div class="rounded-xl bg-red-500/10 border border-red-400/40 p-5"><p class="font-semibold text-red-600 dark:text-red-300">🚀 Producción con carga</p><p class="text-slate-500 dark:text-slate-400 text-sm mt-1"><b>CPX31 / CPX41</b> — más CPU AMD y disco para apps con tráfico real.</p></div>
+      </div>
+    </section>
+
+    <!-- 10 ronda preguntas -->
+    <section class="slide h-full flex-col items-center justify-center px-8">
+      <div class="text-5xl mb-4">🙋</div>
+      <h2 class="text-4xl md:text-5xl font-black mb-8 text-center text-red-600 dark:text-red-300">Ronda de preguntas</h2>
+      <div class="space-y-4 max-w-3xl w-full">
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><p class="font-semibold">1. ¿De qué país es Hetzner y qué producto usamos aquí?</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><p class="font-semibold">2. ¿Qué pueden pedirte al crear una cuenta nueva?</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><p class="font-semibold">3. ¿Cuánto cuesta aproximadamente el modelo más pequeño?</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><p class="font-semibold">4. ¿Qué necesitas para conectarte al servidor tras crearlo?</p></div>
+      </div>
+    </section>
+
+    <!-- 11 buenas prácticas -->
+    <section class="slide h-full flex-col items-center justify-center px-8">
+      <h2 class="text-4xl md:text-5xl font-black mb-8 text-center">Recomendaciones</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl w-full">
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-6"><h3 class="font-bold text-red-600 dark:text-red-300 mb-1">🔑 Usa claves SSH</h3><p class="text-slate-500 dark:text-slate-400 text-sm">Más seguro que contraseña; desactiva el login por contraseña.</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-6"><h3 class="font-bold text-red-600 dark:text-red-300 mb-1">🔐 Activa 2FA</h3><p class="text-slate-500 dark:text-slate-400 text-sm">Protege tu cuenta de Hetzner con doble factor.</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-6"><h3 class="font-bold text-red-600 dark:text-red-300 mb-1">💾 Haz backups</h3><p class="text-slate-500 dark:text-slate-400 text-sm">Activa backups (~20% extra) o snapshots antes de cambios.</p></div>
+        <div class="rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-6"><h3 class="font-bold text-red-600 dark:text-red-300 mb-1">🧱 Firewall en la nube</h3><p class="text-slate-500 dark:text-slate-400 text-sm">Usa el Cloud Firewall de Hetzner para abrir solo lo necesario.</p></div>
+      </div>
+    </section>
+
+    <!-- 12 resumen -->
+    <section class="slide h-full flex-col items-center justify-center px-8 text-center">
+      <div class="text-5xl mb-4">✅</div>
+      <h2 class="text-4xl md:text-5xl font-black mb-8">Resumen del tema</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl w-full text-left">
+        <div class="rounded-xl bg-red-500/10 border border-red-400/30 p-5">Hetzner es un proveedor de <b>nube económico</b> con buen rendimiento.</div>
+        <div class="rounded-xl bg-red-500/10 border border-red-400/30 p-5">Registro: <b>correo → datos → verificación → pago</b>.</div>
+        <div class="rounded-xl bg-red-500/10 border border-red-400/30 p-5">Servidores desde <b>≈ 3,8 €/mes</b>; elige según CPU/RAM.</div>
+        <div class="rounded-xl bg-red-500/10 border border-red-400/30 p-5">Crea el server en <b>Cloud Console</b> y entra por <b>SSH</b>.</div>
+      </div>
+      <p class="mt-8 text-slate-500">Siguiente tema: Instalar Uptime Kuma 📊</p>
+    </section>
+
+  </main>
+
+  <div class="no-print relative flex items-center justify-between px-6 pt-3 pb-12 border-t border-slate-200 dark:border-slate-800">
+    <button onclick="prev()" class="px-5 py-2 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 font-semibold transition">← Anterior</button>
+    <div id="dots" class="hidden md:flex gap-2"></div>
+    <button onclick="next()" class="px-5 py-2 rounded-lg bg-red-500 hover:bg-red-400 text-white font-bold transition">Siguiente →</button>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let cur = 0;
+    const dots = document.getElementById('dots');
+    slides.forEach((_, i) => { const d=document.createElement('button'); d.onclick=()=>go(i); dots.appendChild(d); });
+    function render(){
+      slides.forEach((s,i)=>s.classList.toggle('active', i===cur));
+      document.getElementById('counter').textContent = `${cur+1}/${slides.length}`;
+      [...dots.children].forEach((d,i)=>d.className=`h-2.5 rounded-full transition ${i===cur?'bg-red-500 w-6':'bg-slate-300 dark:bg-slate-600 w-2.5'}`);
+    }
+    function go(i){ cur=Math.max(0,Math.min(slides.length-1,i)); render(); }
+    function next(){ go(cur+1); } function prev(){ go(cur-1); }
+    function downloadPDF(){ window.print(); }
+    function toggleTheme(){ const el=document.documentElement; el.classList.toggle('dark'); localStorage.setItem('theme', el.classList.contains('dark')?'dark':'light'); updateThemeUI(); }
+    function updateThemeUI(){ const dark=document.documentElement.classList.contains('dark'); document.querySelectorAll('.theme-icon').forEach(e=>e.textContent=dark?'☀️':'🌙'); }
+    document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight')next(); if(e.key==='ArrowLeft')prev(); });
+    updateThemeUI(); render();
+  </script>
+</body>
+</html>
