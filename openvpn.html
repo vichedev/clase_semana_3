@@ -107,24 +107,29 @@
       </div>
     </section>
 
-    <!-- 6 instalar servidor -->
-    <section class="slide h-full flex-col items-center justify-center px-8">
-      <span class="text-indigo-600 dark:text-indigo-400 font-bold tracking-widest mb-3 text-center block">INSTALACIÓN DEL SERVIDOR</span>
-      <h2 class="text-4xl md:text-5xl font-black mb-6 text-center">Forma rápida (script)</h2>
-      <p class="text-slate-600 dark:text-slate-300 mb-5 text-center max-w-2xl">En el VPS (Hetzner), un script muy usado instala todo de forma guiada:</p>
-      <div class="w-full max-w-3xl space-y-3">
-        <div class="rounded-xl bg-slate-900 dark:bg-black/60 border border-slate-700 p-5 font-mono text-xs sm:text-sm text-indigo-300 overflow-x-auto"><span class="text-slate-500"># Descargar y ejecutar el instalador</span><br>wget https://git.io/vpn -O openvpn-install.sh<br>bash openvpn-install.sh</div>
+    <!-- 6 del servidor al .ovpn -->
+    <section class="slide h-full flex-col items-center justify-center px-8 text-center">
+      <span class="text-indigo-600 dark:text-indigo-400 font-bold tracking-widest mb-3 block">DEL SERVIDOR AL .OVPN</span>
+      <h2 class="text-4xl md:text-5xl font-black mb-8">¿Cómo se crea la VPN?</h2>
+      <p class="text-slate-600 dark:text-slate-300 max-w-2xl mb-8">El servidor OpenVPN ya está montado. Desde la <b>herramienta web</b> gestionas todo y generas el archivo de cada usuario sin tocar comandos:</p>
+      <div class="flex flex-col md:flex-row items-center justify-center gap-3 max-w-4xl w-full">
+        <div class="rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5 flex-1"><div class="text-3xl mb-2">🖥️</div><h3 class="font-bold text-indigo-600 dark:text-indigo-300 text-sm">Servidor</h3><p class="text-slate-500 dark:text-slate-400 text-xs mt-1">OpenVPN + certificados (CA)</p></div>
+        <div class="text-2xl text-indigo-500">➡️</div>
+        <div class="rounded-2xl bg-indigo-500/10 border border-indigo-400/40 p-5 flex-1"><div class="text-3xl mb-2">🛠️</div><h3 class="font-bold text-indigo-600 dark:text-indigo-300 text-sm">Herramienta web</h3><p class="text-slate-500 dark:text-slate-400 text-xs mt-1">Creas y gestionas usuarios</p></div>
+        <div class="text-2xl text-indigo-500">➡️</div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5 flex-1"><div class="text-3xl mb-2">📄</div><h3 class="font-bold text-indigo-600 dark:text-indigo-300 text-sm">Archivo .ovpn</h3><p class="text-slate-500 dark:text-slate-400 text-xs mt-1">Lo descargas y lo entregas</p></div>
       </div>
-      <p class="mt-5 text-slate-500 dark:text-slate-400 text-sm text-center max-w-2xl">El asistente te pregunta IP, puerto, protocolo (UDP) y DNS, y al final crea el <b>primer cliente</b>.</p>
     </section>
 
-    <!-- 7 crear clientes -->
+    <!-- 7 generar el .ovpn -->
     <section class="slide h-full flex-col items-center justify-center px-8">
-      <h2 class="text-4xl md:text-5xl font-black mb-8 text-center">Crear clientes (.ovpn)</h2>
+      <span class="text-indigo-600 dark:text-indigo-400 font-bold tracking-widest mb-3 text-center block">PASO A PASO</span>
+      <h2 class="text-4xl md:text-5xl font-black mb-8 text-center">Generar el .ovpn</h2>
       <div class="space-y-4 max-w-3xl w-full">
-        <div class="flex items-start gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="flex-shrink-0 w-9 h-9 rounded-full bg-indigo-500 text-white font-black flex items-center justify-center">1</span><p class="text-slate-600 dark:text-slate-300">Vuelve a ejecutar <span class="font-mono">bash openvpn-install.sh</span> y elige <b>"Add a new client"</b>.</p></div>
-        <div class="flex items-start gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="flex-shrink-0 w-9 h-9 rounded-full bg-indigo-500 text-white font-black flex items-center justify-center">2</span><p class="text-slate-600 dark:text-slate-300">Ponle un <b>nombre</b> (ej. <span class="font-mono">juan-laptop</span>).</p></div>
-        <div class="flex items-start gap-4 rounded-xl bg-indigo-500/10 border border-indigo-400/40 p-5"><span class="flex-shrink-0 w-9 h-9 rounded-full bg-indigo-500 text-white font-black flex items-center justify-center">3</span><p class="text-slate-700 dark:text-slate-200">Se genera un archivo <b><span class="font-mono">.ovpn</span></b> con todo dentro: cópialo al dispositivo del usuario.</p></div>
+        <div class="flex items-start gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="flex-shrink-0 w-9 h-9 rounded-full bg-indigo-500 text-white font-black flex items-center justify-center">1</span><p class="text-slate-600 dark:text-slate-300">Entra a la <b>herramienta web</b> (<span class="font-mono text-indigo-600 dark:text-indigo-300">ovpn.rednuevaconexion.net</span>).</p></div>
+        <div class="flex items-start gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="flex-shrink-0 w-9 h-9 rounded-full bg-indigo-500 text-white font-black flex items-center justify-center">2</span><p class="text-slate-600 dark:text-slate-300">Crea un <b>cliente / usuario nuevo</b> y ponle un <b>nombre</b> (ej. <span class="font-mono">juan-laptop</span>).</p></div>
+        <div class="flex items-start gap-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 p-5"><span class="flex-shrink-0 w-9 h-9 rounded-full bg-indigo-500 text-white font-black flex items-center justify-center">3</span><p class="text-slate-600 dark:text-slate-300">La herramienta genera su <b>certificado</b> y arma el archivo automáticamente.</p></div>
+        <div class="flex items-start gap-4 rounded-xl bg-indigo-500/10 border border-indigo-400/40 p-5"><span class="flex-shrink-0 w-9 h-9 rounded-full bg-indigo-500 text-white font-black flex items-center justify-center">4</span><p class="text-slate-700 dark:text-slate-200"><b>Descarga el archivo <span class="font-mono">.ovpn</span></b> y entrégaselo al usuario.</p></div>
       </div>
     </section>
 
@@ -168,8 +173,8 @@
       <h2 class="text-4xl md:text-5xl font-black mb-8">Resumen del tema</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl w-full text-left">
         <div class="rounded-xl bg-indigo-500/10 border border-indigo-400/30 p-5">OpenVPN crea un <b>túnel cifrado</b> hacia tu red.</div>
-        <div class="rounded-xl bg-indigo-500/10 border border-indigo-400/30 p-5">Se instala en un <b>servidor</b> y usa <b>certificados</b>.</div>
-        <div class="rounded-xl bg-indigo-500/10 border border-indigo-400/30 p-5">Cada cliente importa su archivo <b>.ovpn</b>.</div>
+        <div class="rounded-xl bg-indigo-500/10 border border-indigo-400/30 p-5">Desde la <b>herramienta web</b> generas el <b>.ovpn</b> de cada usuario.</div>
+        <div class="rounded-xl bg-indigo-500/10 border border-indigo-400/30 p-5">Cada cliente importa su archivo <b>.ovpn</b> y conecta.</div>
         <div class="rounded-xl bg-indigo-500/10 border border-indigo-400/30 p-5">Ideal para <b>teletrabajo</b> y administración remota.</div>
       </div>
       <p class="mt-8 text-slate-500">Última diapositiva: la herramienta web 🛠️</p>
